@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import TreeMenu from './TreeMenu.vue'
+import './assets/app.css'
 
 //定义树形菜单数据
 let tree = {

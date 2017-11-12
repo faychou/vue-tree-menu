@@ -1,6 +1,12 @@
 <template>
   <div class="tree-menu">
-    <div :style="indent" @click="toggleChildren">{{ label }}</div>
+    <!-- <div :style="indent" @click="toggleChildren">{{ label }}</div> -->
+    <div class="label-wrapper" @click="toggleChildren">
+      <div :style="indent" :class="labelClasses">
+        <i v-if="nodes" class="fa" :class="iconClasses"></i>
+        {{ label }}
+      </div>
+    </div>
     <tree-menu 
       v-if="showChildren" 
       v-for="node in nodes" 
@@ -20,6 +26,15 @@
       return { showChildren: false }
     },
     computed: {
+      iconClasses: function iconClasses() {
+        return {
+          'plus': !this.showChildren,
+          'minus': this.showChildren
+        };
+      },
+      labelClasses: function labelClasses() {
+        return { 'has-children': this.nodes };
+      },
       indent() {
         return { transform: `translate(${this.depth * 50}px)` }
       }
